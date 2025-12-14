@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>श्री कृष्णा किराना स्टोर</title>
+  <style>
+    body {margin:0;font-family:Arial, sans-serif;background:#f5f5f5;color:#333}
+    header {background:#2e7d32;color:#fff;padding:20px;text-align:center}
+    .section {padding:40px}
+    .product-list {background:#fff;padding:20px;border-radius:8px;margin-bottom:20px;box-shadow:0 2px 6px rgba(0,0,0,0.1)}
+    .product-list p {margin:5px 0;}
+    .btn {background:#2e7d32;color:#fff;border:none;padding:8px 16px;border-radius:5px;cursor:pointer;font-size:14px;text-decoration:none;display:inline-block}
+    .btn:hover {background:#388e3c}
+    select {margin-left:10px;padding:4px;}
+  </style>
+  <script>
+    let cart = [];
+
+    function addToCart(name, price, category, brand){
+      let item = name + ' (' + category + ' - ' + brand + ')';
+      let existing = cart.findIndex(i => i.startsWith(item + ' - ₹'));
+      if(existing >= 0){
+        cart[existing] = item + ' - ₹' + price;
+      } else {
+        cart.push(item + ' - ₹' + price);
+      }
+      updateCartWhatsApp();
+    }
+
+    function updateCartWhatsApp(){
+      let cartBtn = document.getElementById('whatsappOrderBtn');
+      if(cart.length === 0){
+        cartBtn.innerText = '🛒 Cart खाली है';
+      } else {
+        cartBtn.innerText = '🛒 Cart: ' + cart.join(', ');
+      }
+    }
+
+    function orderWhatsApp(){
+      if(cart.length===0){alert('Cart खाली है');return;}
+      let msg = 'ऑर्डर सूची:%0A' + cart.map((i,idx)=> (idx+1)+') '+i).join('%0A');
+      window.open('https://wa.me/+918709639601?text='+msg, '_blank');
+    }
+  </script>
+</head>
+<body>
+
+<header>
+  <h1>श्री कृष्णा किराना स्टोर</h1>
+  <p>सभी घर का राशन – एक ही जगह</p>
+</header>
+
+<section class="section" id="products">
+  <h2>हमारे सभी उत्पाद और कीमतें (ब्रांड/श्रेणी + जोड़ने का विकल्प)</h2>
+  <div class="product-list">
+
+    <!-- आटा -->
+    <p>
+      आटा:
+      <select onchange="addToCart('आटा', this.value.split('-')[1], 'आटा', this.value.split('-')[0])">
+        <option value="ब्रांड A-52">ब्रांड A – ₹52 / किलो</option>
+        <option value="ब्रांड B-50">ब्रांड B – ₹50 / किलो</option>
+        <option value="ब्रांड C-48">ब्रांड C – ₹48 / किलो</option>
+        <option value="ब्रांड D-55">ब्रांड D – ₹55 / किलो</option>
+        <option value="ब्रांड E-53">ब्रांड E – ₹53 / किलो</option>
+        <option value="ब्रांड F-51">ब्रांड F – ₹51 / किलो</option>
+        <option value="ब्रांड G-49">ब्रांड G – ₹49 / किलो</option>
+        <option value="ब्रांड H-56">ब्रांड H – ₹56 / किलो</option>
+        <option value="ब्रांड I-54">ब्रांड I – ₹54 / किलो</option>
+        <option value="ब्रांड J-57">ब्रांड J – ₹57 / किलो</option>
+      </select>
+      <button class="btn" onclick="let sel=this.previousElementSibling; addToCart('आटा', sel.value.split('-')[1], 'आटा', sel.value.split('-')[0])">Add to Cart</button>
+    </p>
+
+    <!-- बिस्कुट -->
+    <p>
+      बिस्कुट:
+      <select onchange="addToCart('बिस्कुट', this.value.split('-')[1], 'बिस्कुट', this.value.split('-')[0])">
+        <option value="Parle-G-10">Parle-G – ₹10 / पैक</option>
+        <option value="Good Day-30">Good Day – ₹30 / पैक</option>
+        <option value="Hide & Seek-35">Hide & Seek – ₹35 / पैक</option>
+        <option value="Britannia Treat-28">Britannia Treat – ₹28 / पैक</option>
+        <option value="KitKat-20">KitKat – ₹20 / पैक</option>
+        <option value="Perk-22">Perk – ₹22 / पैक</option>
+        <option value="Hide & Seek Fab-30">Hide & Seek Fab – ₹30 / पैक</option>
+        <option value="Treat Choco-33">Treat Choco – ₹33 / पैक</option>
+        <option value="Oreo-25">Oreo – ₹25 / पैक</option>
+        <option value="Roulade-40">Roulade – ₹40 / पैक</option>
+      </select>
+      <button class="btn" onclick="let sel=this.previousElementSibling; addToCart('बिस्कुट', sel.value.split('-')[1], 'बिस्कुट', sel.value.split('-')[0])">Add to Cart</button>
+    </p>
+
+    <!-- तेल -->
+    <p>
+      तेल:
+      <select onchange="addToCart('तेल', this.value.split('-')[1], 'तेल', this.value.split('-')[0])">
+        <option value="सरसों तेल-160">सरसों तेल – ₹160 / लीटर</option>
+        <option value="रिफाइंड तेल-150">रिफाइंड तेल – ₹150 / लीटर</option>
+        <option value="सूरजमुखी तेल-155">सूरजमुखी तेल – ₹155 / लीटर</option>
+        <option value="सोयाबीन तेल-145">सोयाबीन तेल – ₹145 / लीटर</option>
+        <option value="मक्का तेल-150">मक्का तेल – ₹150 / लीटर</option>
+        <option value="तिल का तेल-165">तिल का तेल – ₹165 / लीटर</option>
+        <option value="मिक्स्ड तेल-158">मिक्स्ड तेल – ₹158 / लीटर</option>
+        <option value="कुकिंग तेल-152">कुकिंग तेल – ₹152 / लीटर</option>
+        <option value="वनस्पति तेल-157">वनस्पति तेल – ₹157 / लीटर</option>
+        <option value="मसल्स तेल-160">मसल्स तेल – ₹160 / लीटर</option>
+      </select>
+      <button class="btn" onclick="let sel=this.previousElementSibling; addToCart('तेल', sel.value.split('-')[1], 'तेल', sel.value.split('-')[0])">Add to Cart</button>
+    </p>
+
+    <!-- मसाला -->
+    <p>
+      मसाला:
+      <select onchange="addToCart('मसाला', this.value.split('-')[1], 'मसाला', this.value.split('-')[0])">
+        <option value="Haldi-40">Haldi – ₹40 / पैक</option>
+        <option value="Mirch-35">Mirch – ₹35 / पैक</option>
+        <option value="Dhaniya-30">Dhaniya – ₹30 / पैक</option>
+        <option value="Garam Masala-50">Garam Masala – ₹50 / पैक</option>
+        <option value="Jeera-45">Jeera – ₹45 / पैक</option>
+        <option value="Ajwain-25">Ajwain – ₹25 / पैक</option>
+        <option value="Haldi Powder-42">Haldi Powder – ₹42 / पैक</option>
+        <option value="Sabut Masala-55">Sabut Masala – ₹55 / पैक</option>
+        <option value="Kitchen King-48">Kitchen King – ₹48 / पैक</option>
+        <option value="Chaat Masala-38">Chaat Masala – ₹38 / पैक</option>
+      </select>
+      <button class="btn" onclick="let sel=this.previousElementSibling; addToCart('मसाला', sel.value.split('-')[1], 'मसाला', sel.value.split('-')[0])">Add to Cart</button>
+    </p>
+
+    <!-- साबुन -->
+    <p>
+      साबुन:
+      <select onchange="addToCart('साबुन', this.value.split('-')[1], 'साबुन', this.value.split('-')[0])">
+        <option value="Lux-25">Lux – ₹25 / पीस</option>
+        <option value="Dettol-30">Dettol – ₹30 / पीस</option>
+        <option value="Liril-20">Liril – ₹20 / पीस</option>
+        <option value="Pears-35">Pears – ₹35 / पीस</option>
+        <option value="Nirma-15">Nirma – ₹15 / पीस</option>
+        <option value="Cinthol-40">Cinthol – ₹40 / पीस</option>
+        <option value="Godrej-22">Godrej – ₹22 / पीस</option>
+        <option value="Fena-18">Fena – ₹18 / पीस</option>
+        <option value="Margo-28">Margo – ₹28 / पीस</option>
+        <option value="Savlon-33">Savlon – ₹33 / पीस</option>
+      </select>
+      <button class="btn" onclick="let sel=this.previousElementSibling; addToCart('साबुन', sel.value.split('-')[1], 'साबुन', sel.value.split('-')[0])">Add to Cart</button>
+    </p>
+
+  </div>
+  <button class="btn" id="whatsappOrderBtn" onclick="orderWhatsApp()" style="margin-top:20px;font-size:16px;padding:10px 20px">🛒 Cart खाली है</button>
+</section>
+
+<footer style="text-align:center;padding:20px;background:#1b5e20;color:#fff;">
+  &copy; 2025 श्री कृष्णा किराना स्टोर. All rights reserved.
+</footer>
+
+</body>
+</html>
